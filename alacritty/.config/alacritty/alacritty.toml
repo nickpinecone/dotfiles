@@ -1,0 +1,8 @@
+[font]
+size = 14.0
+
+[font.normal]
+family = "JetBrainsMono NFM"
+
+[shell]
+program = "/usr/bin/zsh"
