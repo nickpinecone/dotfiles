@@ -20,6 +20,9 @@ zinit light zsh-users/zsh-autosuggestions
 autoload -U compinit && compinit
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu select
+setopt menu_complete
+setopt no_list_ambiguous
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
@@ -39,8 +42,11 @@ setopt hist_find_no_dups
 
 # Keybindings
 bindkey "^a" autosuggest-accept
-bindkey "^p" history-search-backward
-bindkey "^n" history-search-forward
+bindkey "^p" reverse-menu-complete
+bindkey "^n" complete-word
+bindkey "^y" kill-line
+bindkey "^e" send-break
+bindkey "^k" kill-whole-line
 
 # General shell settings
 EDITOR="/usr/bin/nvim"
