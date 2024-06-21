@@ -1,6 +1,11 @@
-vim.g.mapleader = ' '
-vim.g.localmapleader = ' '
+vim.g.mapleader = " "
+vim.g.localmapleader = " "
 vim.g.have_nerd_font = true
+
+vim.opt.listchars:append({
+    tab = "» ",
+    space = "·",
+})
 
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
