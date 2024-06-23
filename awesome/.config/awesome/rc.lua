@@ -14,6 +14,11 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+-- Awesome widgets
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -176,7 +181,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({"1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -228,6 +233,9 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
+            volume_widget({ widget_type = "icon_and_text", device = "pipewire", step = 1 }),
+            battery_widget({ show_current_level = true, font = beautiful.font, margin_left = 8, margin_right = 8 }),
+            brightness_widget({ type = "icon_and_text", base = 100 }),
         },
     })
 end)
@@ -249,7 +257,6 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
     awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
     awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
-
     awful.key({ modkey }, "l", function()
         awful.client.focus.byidx(1)
     end, { description = "focus next by index", group = "client" }),
@@ -268,7 +275,6 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" }, "h", function()
         awful.client.swap.byidx(-1)
     end, { description = "swap with previous client by index", group = "client" }),
-
     awful.key({ modkey, "Control" }, "l", function()
         awful.tag.incmwfact(0.05)
     end, { description = "increase master width factor", group = "layout" }),
@@ -288,7 +294,6 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "j", function()
         awful.tag.viewprev()
     end, { description = "focus the previous screen", group = "screen" }),
-
     awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
     awful.key({ modkey }, "Tab", function()
         awful.client.focus.history.previous()
@@ -303,7 +308,6 @@ globalkeys = gears.table.join(
     end, { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
     awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
-
     awful.key({ modkey }, "space", function()
         awful.layout.inc(1)
     end, { description = "select next", group = "layout" }),

@@ -13,15 +13,15 @@ local theme = {}
 theme.font = "monospace 12"
 
 theme.bg_normal = "#191724"
-theme.bg_focus = "#403d52"
+theme.bg_focus = "#31748f"
 theme.bg_urgent = "#eb6f92"
-theme.bg_minimize = "#21202e"
+theme.bg_minimize = "#1f1d2e"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#e0def4"
-theme.fg_focus = "#e0def4"
-theme.fg_urgent = "#e0def4"
-theme.fg_minimize = "#e0def4"
+theme.fg_normal = "#f2e9e1"
+theme.fg_focus = theme.fg_normal
+theme.fg_urgent = theme.fg_normal
+theme.fg_minimize = theme.fg_nomal
 
 theme.useless_gap = dpi(2)
 theme.border_width = dpi(2)
