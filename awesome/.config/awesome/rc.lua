@@ -56,7 +56,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/default/theme.lua")
+beautiful.init("~/.config/awesome/rose-pine/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
