@@ -15,9 +15,12 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Awesome widgets
+local systray_widget = require("systray-widget")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -87,9 +90,9 @@ myawesomemenu = {
             hotkeys_popup.show_help(nil, awful.screen.focused())
         end,
     },
-    { "manual",      terminal .. " -e man awesome" },
+    { "manual", terminal .. " -e man awesome" },
     { "edit config", editor_cmd .. " " .. awesome.conffile },
-    { "restart",     awesome.restart },
+    { "restart", awesome.restart },
     {
         "quit",
         function()
@@ -117,6 +120,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+mycalendar = calendar_widget({ placement = "top_right" })
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -228,14 +232,15 @@ awful.screen.connect_for_each_screen(function(s)
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
-        {             -- Right widgets
+        { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            systray_widget(),
             mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
             volume_widget({ widget_type = "icon_and_text", device = "pipewire", step = 1 }),
             battery_widget({ show_current_level = true, font = beautiful.font, margin_left = 8, margin_right = 8 }),
             brightness_widget({ type = "icon_and_text", base = 100 }),
+            mytextclock,
+            logout_menu_widget({ font = "monospace 12" }),
         },
     })
 end)
@@ -249,6 +254,12 @@ root.buttons(gears.table.join(
     awful.button({}, 4, awful.tag.viewnext),
     awful.button({}, 5, awful.tag.viewprev)
 ))
+
+mytextclock:connect_signal("button::press", function(_, _, _, button)
+    if button == 1 then
+        mycalendar.toggle()
+    end
+end)
 -- }}}
 
 -- {{{ Key bindings
@@ -469,7 +480,7 @@ awful.rules.rules = {
     {
         rule_any = {
             instance = {
-                "DTA",   -- Firefox addon DownThemAll.
+                "DTA", -- Firefox addon DownThemAll.
                 "copyq", -- Includes session name in class.
                 "pinentry",
             },
@@ -478,7 +489,7 @@ awful.rules.rules = {
                 "Blueman-manager",
                 "Gpick",
                 "Kruler",
-                "MessageWin",  -- kalarm.
+                "MessageWin", -- kalarm.
                 "Sxiv",
                 "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
                 "Wpa_gui",
@@ -492,9 +503,9 @@ awful.rules.rules = {
                 "Event Tester", -- xev.
             },
             role = {
-                "AlarmWindow",   -- Thunderbird's calendar.
+                "AlarmWindow", -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
-                "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
+                "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
             },
         },
         properties = { floating = true },
@@ -545,7 +556,7 @@ client.connect_signal("request::titlebars", function(c)
             buttons = buttons,
             layout = wibox.layout.fixed.horizontal,
         },
-        {     -- Middle
+        { -- Middle
             { -- Title
                 align = "center",
                 widget = awful.titlebar.widget.titlewidget(c),

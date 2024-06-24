@@ -24,6 +24,9 @@ theme.border_normal = "#000000"
 theme.border_focus = "#9ccfd8"
 theme.border_marked = "#c4a7e7"
 
+-- System tray options:
+theme.systray_icon_spacing = dpi(4)
+
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_normal)

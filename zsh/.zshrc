@@ -1,4 +1,4 @@
-PATH="${HOME}/.local/bin:{$PATH}"
+PATH="${HOME}/.local/bin:${PATH}"
 
 # Setup zinit plugin manager
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
