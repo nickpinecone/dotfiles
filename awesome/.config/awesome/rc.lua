@@ -57,6 +57,10 @@ do
 end
 -- }}}
 
+-- {{{
+awful.spawn.easy_async_with_shell("ibus-daemon", function() end)
+-- }}}
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/rose-pine/theme.lua")
@@ -113,9 +117,6 @@ mylauncher = awful.widget.launcher({
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -231,11 +232,10 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        wibox.container.place(wibox.container.margin(mytextclock, 178, 0, 0, 0), "center", "center"),
+        wibox.container.place(wibox.container.margin(mytextclock, 140, 0, 0, 0), "center", "center"),
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             systray_widget(),
-            mykeyboardlayout,
             volume_widget({ widget_type = "icon_and_text", device = "pipewire", step = 1 }),
             battery_widget({ show_current_level = true, font = beautiful.font, margin_left = 8, margin_right = 8 }),
             brightness_widget({ type = "icon_and_text", base = 100 }),
@@ -263,6 +263,9 @@ end)
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({ "Control" }, "space", function()
+        awful.spawn.easy_async_with_shell("~/.config/awesome/ibus-switch.sh", function() end)
+    end, { description = "switch keyboard layout", group = "awesome" }),
     awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
     awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
     awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),

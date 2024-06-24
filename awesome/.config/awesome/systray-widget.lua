@@ -8,9 +8,13 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 
 local systray_widget = wibox.widget({
-    widget = wibox.widget.textbox,
-    text = "▾",
-    font = "monospace 24",
+    {
+        widget = wibox.widget.textbox,
+        text = "▾",
+        font = "monospace 24",
+    },
+    right = 6,
+    widget = wibox.container.margin,
 })
 
 local function worker()
