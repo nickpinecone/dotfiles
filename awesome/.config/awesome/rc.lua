@@ -120,7 +120,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
-mycalendar = calendar_widget({ placement = "top_right" })
+mycalendar = calendar_widget({ placement = "top" })
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -231,7 +231,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        wibox.container.place(wibox.container.margin(mytextclock, 178, 0, 0, 0), "center", "center"),
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             systray_widget(),
@@ -239,7 +239,6 @@ awful.screen.connect_for_each_screen(function(s)
             volume_widget({ widget_type = "icon_and_text", device = "pipewire", step = 1 }),
             battery_widget({ show_current_level = true, font = beautiful.font, margin_left = 8, margin_right = 8 }),
             brightness_widget({ type = "icon_and_text", base = 100 }),
-            mytextclock,
             logout_menu_widget({ font = "monospace 12" }),
         },
     })
