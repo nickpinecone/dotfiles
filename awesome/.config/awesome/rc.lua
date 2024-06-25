@@ -263,7 +263,7 @@ end)
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ "Control" }, "space", function()
+    awful.key({ "Shift" }, "Alt_L", function()
         awful.spawn.easy_async_with_shell("~/.config/awesome/ibus-switch.sh", function() end)
     end, { description = "switch keyboard layout", group = "awesome" }),
     awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),

@@ -1,3 +1,5 @@
+local servers = { "lua_ls", "csharp_ls", "clangd", "cssls", "html", "tsserver" }
+
 return {
     {
         "williamboman/mason.nvim",
@@ -11,7 +13,7 @@ return {
 
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "csharp_ls" },
+                ensure_installed = servers,
             })
         end,
     },
@@ -23,13 +25,11 @@ return {
 
             local lspconfig = require("lspconfig")
 
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
-            })
-
-            lspconfig.csharp_ls.setup({
-                capabilities = capabilities,
-            })
+            for _, name in ipairs(servers) do
+                lspconfig[name].setup({
+                    capabilities = capabilities,
+                })
+            end
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
