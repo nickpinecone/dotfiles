@@ -1,4 +1,4 @@
-local servers = { "lua_ls", "csharp_ls", "clangd", "cssls", "html", "tsserver" }
+local servers = { "lua_ls", "csharp_ls", "clangd", "cssls", "html", "tsserver", "marksman" }
 
 return {
     {
