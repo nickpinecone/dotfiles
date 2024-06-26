@@ -3,9 +3,14 @@ local servers = { "lua_ls", "csharp_ls", "clangd", "cssls", "html", "tsserver" }
 return {
     {
         "williamboman/mason.nvim",
+        dependencies = { "jay-babu/mason-nvim-dap.nvim" },
 
         config = function()
             require("mason").setup()
+            require("mason-nvim-dap").setup({
+                ensure_installed = { "coreclr", "codelldb", "js" },
+                handlers = {},
+            })
         end,
     },
     {
