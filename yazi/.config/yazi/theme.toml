@@ -1,0 +1,27 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+
+# : Status {{{
+
+[status]
+separator_open = ""
+separator_close = ""
+separator_style = { fg = "#2A273F", bg = "#2A273F" }
+
+# Mode
+mode_normal = { fg = "#191724", bg = "#ebbcba", bold = true }
+mode_select = { fg = "#e0def4", bg = "#9ccfd8", bold = true }
+mode_unset = { fg = "#e0def4", bg = "#b4637a", bold = true }
+
+# Progress
+progress_label = { fg = "#e0def4", bold = true }
+progress_normal = { fg = "#191724", bg = "#2A273F" }
+progress_error = { fg = "#B4637A", bg = "#2A273F" }
+
+# Permissions
+permissions_t = { fg = "#31748f" }
+permissions_r = { fg = "#f6c177" }
+permissions_w = { fg = "#B4637A" }
+permissions_x = { fg = "#9ccfd8" }
+permissions_s = { fg = "#524f67" }
+
+# : }}}
