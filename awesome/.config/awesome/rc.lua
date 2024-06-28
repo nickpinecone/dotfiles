@@ -15,7 +15,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Awesome widgets
-local systray_widget = require("systray-widget")
+local systray_widget = require("custom.systray-widget")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
@@ -120,7 +120,11 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget({
+    wibox.widget.textclock(),
+    left = -6,
+    widget = wibox.container.margin,
+})
 mycalendar = calendar_widget({ placement = "top_left" })
 
 -- Create a wibox for each screen and add it
@@ -255,7 +259,7 @@ awful.screen.connect_for_each_screen(function(s)
             separator,
             battery_widget({ show_current_level = true, font = beautiful.font }),
             separator,
-            brightness_widget({ type = "icon_and_text", base = 100 }),
+            brightness_widget({ type = "icon_and_text", base = 100, step = 1 }),
             separator,
             logout_menu_widget({ font = "monospace 12" }),
         },
@@ -282,7 +286,7 @@ end)
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ "Shift" }, "Alt_L", function()
-        awful.spawn.easy_async_with_shell("~/.config/awesome/ibus-switch.sh", function() end)
+        awful.spawn.easy_async_with_shell("~/.config/awesome/custom/ibus-switch.sh", function() end)
     end, { description = "switch keyboard layout", group = "awesome" }),
     awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
     awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),

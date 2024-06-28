@@ -7,15 +7,23 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 
+local icon = wibox.widget({
+    widget = wibox.widget.imagebox,
+    resize = false,
+})
+
+icon:set_image("/usr/share/icons/Arc/actions/symbolic/go-bottom-symbolic.svg")
+
 local systray_widget = wibox.widget({
     {
-        widget = wibox.widget.textbox,
-        text = "▾",
-        font = "monospace 24",
+        icon,
+        valign = "center",
+        layout = wibox.container.place,
     },
-    left = 6,
+    top = 3,
     widget = wibox.container.margin,
 })
+
 
 local function worker()
     local systray = wibox.widget.systray()
