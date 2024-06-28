@@ -13,7 +13,7 @@ local systray_widget = wibox.widget({
         text = "▾",
         font = "monospace 24",
     },
-    right = 6,
+    left = 6,
     widget = wibox.container.margin,
 })
 

@@ -94,9 +94,9 @@ myawesomemenu = {
             hotkeys_popup.show_help(nil, awful.screen.focused())
         end,
     },
-    { "manual", terminal .. " -e man awesome" },
+    { "manual",      terminal .. " -e man awesome" },
     { "edit config", editor_cmd .. " " .. awesome.conffile },
-    { "restart", awesome.restart },
+    { "restart",     awesome.restart },
     {
         "quit",
         function()
@@ -121,7 +121,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
-mycalendar = calendar_widget({ placement = "top" })
+mycalendar = calendar_widget({ placement = "top_left" })
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -224,6 +224,18 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
+    -- Create widget separator
+    local separator = wibox.widget({
+        {
+            widget = wibox.widget.textbox,
+            text = "|",
+            font = beautiful.font,
+        },
+        left = 6,
+        right = 6,
+        widget = wibox.container.margin,
+    })
+
     -- Add widgets to the wibox
     s.mywibox:setup({
         layout = wibox.layout.align.horizontal,
@@ -231,14 +243,20 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             s.mytaglist,
             s.mypromptbox,
+            separator,
+            mytextclock,
         },
-        wibox.container.place(wibox.container.margin(mytextclock, 140, 0, 0, 0), "center", "center"),
+        wibox.widget({}),
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             systray_widget(),
+            separator,
             volume_widget({ widget_type = "icon_and_text", device = "pipewire", step = 1 }),
-            battery_widget({ show_current_level = true, font = beautiful.font, margin_left = 8, margin_right = 8 }),
+            separator,
+            battery_widget({ show_current_level = true, font = beautiful.font }),
+            separator,
             brightness_widget({ type = "icon_and_text", base = 100 }),
+            separator,
             logout_menu_widget({ font = "monospace 12" }),
         },
     })
@@ -482,7 +500,7 @@ awful.rules.rules = {
     {
         rule_any = {
             instance = {
-                "DTA", -- Firefox addon DownThemAll.
+                "DTA",   -- Firefox addon DownThemAll.
                 "copyq", -- Includes session name in class.
                 "pinentry",
             },
@@ -491,7 +509,7 @@ awful.rules.rules = {
                 "Blueman-manager",
                 "Gpick",
                 "Kruler",
-                "MessageWin", -- kalarm.
+                "MessageWin",  -- kalarm.
                 "Sxiv",
                 "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
                 "Wpa_gui",
@@ -505,9 +523,9 @@ awful.rules.rules = {
                 "Event Tester", -- xev.
             },
             role = {
-                "AlarmWindow", -- Thunderbird's calendar.
+                "AlarmWindow",   -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
-                "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+                "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
             },
         },
         properties = { floating = true },
@@ -558,7 +576,7 @@ client.connect_signal("request::titlebars", function(c)
             buttons = buttons,
             layout = wibox.layout.fixed.horizontal,
         },
-        { -- Middle
+        {     -- Middle
             { -- Title
                 align = "center",
                 widget = awful.titlebar.widget.titlewidget(c),
