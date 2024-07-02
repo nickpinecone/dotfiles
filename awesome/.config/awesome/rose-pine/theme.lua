@@ -36,7 +36,7 @@ theme.menu_submenu_icon = themes_path .. "rose-pine/submenu.png"
 theme.menu_height = dpi(15)
 theme.menu_width = dpi(100)
 
-theme.wallpaper = themes_path .. "rose-pine/background-alt.jpg"
+theme.wallpaper = themes_path .. "rose-pine/background-alt.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
