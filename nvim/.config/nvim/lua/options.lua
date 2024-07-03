@@ -25,3 +25,5 @@ vim.keymap.set("i", "kj", "<Esc>", {})
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]], {})
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], {})
 vim.keymap.set({"n", "v"}, "<leader>p", [["+p]], {})
+
+vim.cmd("au BufNewFile,BufRead *.ejs set filetype=html")
