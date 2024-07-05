@@ -41,6 +41,9 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Keybindings
+bindkey "^u" history-search-backward
+bindkey "^b" history-search-forward
+
 bindkey "^a" autosuggest-accept
 bindkey "^p" reverse-menu-complete
 bindkey "^n" complete-word
