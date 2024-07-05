@@ -57,12 +57,6 @@ do
 end
 -- }}}
 
--- {{{
-awful.spawn.easy_async_with_shell("ibus-daemon", function() end)
-awful.spawn.easy_async_with_shell("xautolock -time 10  -locker \"systemctl suspend\"", function() end)
-awful.spawn.easy_async_with_shell("xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork", function() end)
--- }}}
-
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/rose-pine/theme.lua")
@@ -268,6 +262,9 @@ awful.screen.connect_for_each_screen(function(s)
                 onlock = function()
                     awful.spawn.with_shell("i3lock-fancy")
                 end,
+                onsuspend = function()
+                    awful.spawn.with_shell("i3lock-fancy && systemctl suspend")
+                end
             }),
         },
     })
@@ -293,7 +290,7 @@ end)
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ "Shift" }, "Alt_L", function()
-        awful.spawn.easy_async_with_shell("~/.config/awesome/custom/ibus-switch.sh", function() end)
+        awful.spawn.easy_async_with_shell("~/.config/awesome/custom/keyboard-layout.sh", function() end)
     end, { description = "switch keyboard layout", group = "awesome" }),
     awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
     awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
@@ -613,4 +610,9 @@ end)
 client.connect_signal("unfocus", function(c)
     c.border_color = beautiful.border_normal
 end)
+-- }}}
+
+-- {{{
+awful.spawn.easy_async_with_shell("ibus-daemon", function() end)
+awful.spawn.easy_async_with_shell("~/.config/awesome/custom/idle-lock.sh", function() end)
 -- }}}
