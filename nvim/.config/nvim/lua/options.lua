@@ -20,6 +20,10 @@ vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", {})
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", {})
 vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", {})
 
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", {})
+vim.keymap.set("n", "<leader>w", ":w<CR>", {})
+vim.keymap.set("n", "<leader>q", ":q<CR>", {})
+
 vim.keymap.set("i", "kj", "<Esc>", {})
 
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]], {})
