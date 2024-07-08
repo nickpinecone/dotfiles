@@ -3,10 +3,7 @@
 ${HOME}/.local/bin/xidlehook \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer 60 \
-    'light -S 0' \
-    '' \
-  --timer 240 \
+  --timer 300 \
     'i3lock-fancy' \
     '' \
   --timer 300 \
