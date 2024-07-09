@@ -612,7 +612,4 @@ client.connect_signal("unfocus", function(c)
 end)
 -- }}}
 
--- {{{
-awful.spawn("ibus-daemon", function() end)
-awful.spawn.once("~/.config/awesome/custom/idle-lock.sh", function() end)
--- }}}
+awful.spawn.easy_async_with_shell("~/.config/awesome/custom/startup-run.sh", function() end)

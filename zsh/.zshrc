@@ -26,6 +26,7 @@ setopt no_list_ambiguous
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
+. "$HOME/.asdf/asdf.sh"
 
 # History
 [ ! -f "${HOME}/.zsh_history" ] && touch "${HOME}/.zsh_history"
