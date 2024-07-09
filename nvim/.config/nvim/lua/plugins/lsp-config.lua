@@ -1,4 +1,5 @@
-local servers = { "lua_ls", "csharp_ls", "clangd", "rust_analyzer", "cssls", "html", "tsserver", "marksman" }
+local servers =
+{ "lua_ls", "csharp_ls", "clangd", "rust_analyzer", "cssls", "html", "tsserver", "elixirls", "marksman" }
 
 return {
     {
@@ -8,7 +9,7 @@ return {
         config = function()
             require("mason").setup()
             require("mason-nvim-dap").setup({
-                ensure_installed = { "coreclr", "codelldb", "js" },
+                ensure_installed = { "coreclr", "codelldb", "js", "elixir" },
                 handlers = {},
             })
         end,
@@ -31,9 +32,16 @@ return {
             local lspconfig = require("lspconfig")
 
             for _, name in ipairs(servers) do
-                lspconfig[name].setup({
-                    capabilities = capabilities,
-                })
+                if name == "elixirls" then
+                    lspconfig.elixirls.setup({
+                        capabilities = capabilities,
+                        cmd = { vim.fn.stdpath("data") .. "/mason/packages/elixir-ls/language_server.sh" },
+                    })
+                else
+                    lspconfig[name].setup({
+                        capabilities = capabilities,
+                    })
+                end
             end
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})

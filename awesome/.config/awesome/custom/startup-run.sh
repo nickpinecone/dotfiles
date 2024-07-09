@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 run() {
   if ! pgrep -f "$1" ;
@@ -7,5 +7,5 @@ run() {
   fi
 }
 
-run "${HOME}/.config/awesome/custom/daemons.sh"
-run "${HOME}/.config/awesome/custom/idle-lock.sh"
+run "xfce4-power-manager"
+run "${HOME}/.config/awesome/custom/ibus-daemon.sh"
