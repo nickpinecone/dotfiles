@@ -24,9 +24,6 @@ zstyle ':completion:*' menu select
 setopt menu_complete
 setopt no_list_ambiguous
 
-# Shell integrations
-eval "$(zoxide init --cmd cd zsh)"
-
 # History
 [ ! -f "${HOME}/.zsh_history" ] && touch "${HOME}/.zsh_history"
 HISTSIZE=5000
@@ -50,6 +47,9 @@ bindkey "^n" complete-word
 bindkey "^y" kill-line
 bindkey "^e" send-break
 bindkey "^k" kill-whole-line
+
+# Shell integrations
+eval "$(zoxide init --cmd cd zsh)"
 
 # General shell settings
 EDITOR="/usr/bin/nvim"
