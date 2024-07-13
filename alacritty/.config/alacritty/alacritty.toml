@@ -8,3 +8,6 @@ family = "JetBrainsMono NFM"
 
 [shell]
 program = "/usr/bin/zsh"
+
+[window]
+decorations = "none"
