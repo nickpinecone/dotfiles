@@ -11,3 +11,6 @@ program = "/usr/bin/zsh"
 
 [window]
 decorations = "none"
+
+[cursor]
+style = "beam"

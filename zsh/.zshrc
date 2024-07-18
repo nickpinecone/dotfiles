@@ -15,6 +15,21 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/ohmyposh.toml)"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light jeffreytse/zsh-vi-mode
+
+# Setup vi mode
+ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
+
+function after() {
+    bindkey "^p" reverse-menu-complete
+    bindkey "^n" complete-word
+    bindkey "^a" autosuggest-accept
+    bindkey "^e" send-break
+    bindkey "^y" kill-line
+}
+zvm_after_init_commands+=(after)
 
 # Load completions
 autoload -U compinit && compinit
@@ -36,17 +51,6 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
-
-# Keybindings
-bindkey "^u" history-search-backward
-bindkey "^b" history-search-forward
-
-bindkey "^a" autosuggest-accept
-bindkey "^p" reverse-menu-complete
-bindkey "^n" complete-word
-bindkey "^y" kill-line
-bindkey "^e" send-break
-bindkey "^k" kill-whole-line
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
