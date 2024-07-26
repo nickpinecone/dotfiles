@@ -7,9 +7,9 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Setup ohmyposh
-POSH_HOME="${HOME}/.local/bin"
+POSH_HOME="${HOME}/.local/share/zinit"
 [ ! -f "${POSH_HOME}/oh-my-posh" ] && curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$POSH_HOME"
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/ohmyposh.toml)"
+eval "$(${POSH_HOME}/oh-my-posh init zsh --config $HOME/.config/ohmyposh/ohmyposh.toml)"
 
 # Install plugins
 zinit light zsh-users/zsh-syntax-highlighting

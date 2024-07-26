@@ -6,11 +6,12 @@ size = 14.0
 [font.normal]
 family = "JetBrainsMono NFM"
 
-[shell]
-program = "/usr/bin/zsh"
-
 [window]
 decorations = "none"
 
 [cursor]
 style = "beam"
+
+[shell]
+program = "/usr/bin/zsh"
+args = ["-c", "tmux attach || tmux new"]
