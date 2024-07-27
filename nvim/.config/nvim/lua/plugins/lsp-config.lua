@@ -1,5 +1,3 @@
-local servers = { "lua_ls", "csharp_ls", "clangd", "cssls", "html", "tsserver", "elixirls", "marksman" }
-
 return {
     {
         "williamboman/mason.nvim",
@@ -8,7 +6,6 @@ return {
         config = function()
             require("mason").setup()
             require("mason-nvim-dap").setup({
-                ensure_installed = { "coreclr", "codelldb", "js", "elixir" },
                 handlers = {},
             })
         end,
@@ -17,9 +14,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
 
         config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = servers,
-            })
+            require("mason-lspconfig").setup({})
         end,
     },
     {
@@ -27,21 +22,36 @@ return {
 
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
             local lspconfig = require("lspconfig")
 
-            for _, name in ipairs(servers) do
-                if name == "elixirls" then
-                    lspconfig.elixirls.setup({
-                        capabilities = capabilities,
-                        cmd = { vim.fn.stdpath("data") .. "/mason/packages/elixir-ls/language_server.sh" },
-                    })
-                else
-                    lspconfig[name].setup({
-                        capabilities = capabilities,
-                    })
-                end
-            end
+            lspconfig.lua_ls.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.csharp_ls.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.cssls.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.html.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.tsserver.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.elixirls.setup({
+                capabilities = capabilities,
+                cmd = { vim.fn.stdpath("data") .. "/mason/packages/elixir-ls/language_server.sh" },
+            })
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
