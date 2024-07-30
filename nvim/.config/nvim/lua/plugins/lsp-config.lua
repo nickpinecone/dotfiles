@@ -48,9 +48,12 @@ return {
                 capabilities = capabilities,
             })
 
-            lspconfig.elixirls.setup({
+            lspconfig.svelte.setup({
                 capabilities = capabilities,
-                cmd = { vim.fn.stdpath("data") .. "/mason/packages/elixir-ls/language_server.sh" },
+            })
+
+            lspconfig.tailwindcss.setup({
+                capabilities = capabilities,
             })
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
