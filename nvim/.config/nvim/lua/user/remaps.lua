@@ -14,3 +14,12 @@ vim.keymap.set("n", "n", [[nzz]], {})
 vim.keymap.set("n", "N", [[Nzz]], {})
 
 vim.keymap.set("i", "kj", "<Esc>", {})
+
+vim.keymap.set("n", "<A-k>", ":<c-u>execute 'move -1-'. v:count1<cr>", {})
+vim.keymap.set("n", "<A-j>", ":<c-u>execute 'move +'. v:count1<cr>", {})
+
+vim.keymap.set("v", "<A-k>", ":<C-U>exec \"'<,'>move '<-\" . (1+v:count1)<CR>gv", {})
+vim.keymap.set("v", "<A-j>", ":<C-U>exec \"'<,'>move '>+\" . (0+v:count1)<CR>gv", {})
+
+vim.keymap.set("v", "<", "<gv", {})
+vim.keymap.set("v", ">", ">gv", {})
