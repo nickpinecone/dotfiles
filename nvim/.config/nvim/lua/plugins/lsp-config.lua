@@ -48,6 +48,14 @@ return {
                 capabilities = capabilities,
             })
 
+            lspconfig.jsonls.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.svelte.setup({
+                capabilities = capabilities,
+            })
+
             lspconfig.pyright.setup({
                 capabilities = capabilities,
             })
