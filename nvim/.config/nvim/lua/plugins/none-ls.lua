@@ -6,8 +6,14 @@ return {
 
         null_ls.setup({
             sources = {
-                null_ls.builtins.formatting.stylua,
-                null_ls.builtins.formatting.clang_format,
+                null_ls.builtins.formatting.stylua.with({
+                    extra_args = { "--config-path", vim.fn.stdpath("config") .. "stylua.toml" },
+                }),
+
+                null_ls.builtins.formatting.clang_format.with({
+                    extra_args = { "-style=microsoft" },
+                }),
+
                 null_ls.builtins.formatting.black,
             },
         })
