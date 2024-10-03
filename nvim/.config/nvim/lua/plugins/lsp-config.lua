@@ -44,11 +44,7 @@ return {
                 capabilities = capabilities,
             })
 
-            lspconfig.tsserver.setup({
-                capabilities = capabilities,
-            })
-
-            lspconfig.jsonls.setup({
+            lspconfig.ts_ls.setup({
                 capabilities = capabilities,
             })
 
