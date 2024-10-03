@@ -23,3 +23,6 @@ vim.keymap.set("v", "<A-j>", ":<C-U>exec \"'<,'>move '>+\" . (0+v:count1)<CR>gv"
 
 vim.keymap.set("v", "<", "<gv", {})
 vim.keymap.set("v", ">", ">gv", {})
+
+vim.keymap.set("n", "<leader>sr", ":TermExec cmd=\"dotnet run\"<CR>", {})
+vim.keymap.set("n", "<leader>sb", ":TermExec cmd=\"dotnet build\"<CR>", {})
