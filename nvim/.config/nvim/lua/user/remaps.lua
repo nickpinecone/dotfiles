@@ -26,3 +26,4 @@ vim.keymap.set("v", ">", ">gv", {})
 
 vim.keymap.set("n", "<leader>sr", ":TermExec cmd=\"dotnet run\"<CR>", {})
 vim.keymap.set("n", "<leader>sb", ":TermExec cmd=\"dotnet build\"<CR>", {})
+vim.keymap.set("n", "<leader>se", ":TermExec cmd=\"dotnet restore\"<CR>", {})
