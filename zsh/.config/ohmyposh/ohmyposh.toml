@@ -3,7 +3,8 @@ version = 3
 final_space = true
 
 [transient_prompt]
-  template = '› '
+  # template = '› '
+  template = '🎄 '
   foreground = 'white'
 
 [[blocks]]
@@ -33,7 +34,8 @@ final_space = true
       fetch_status = true
 
   [[blocks.segments]]
-    template = '{{ if gt .Code 0 }}⨯{{ else }}›{{ end }}'
+    # template = '{{ if gt .Code 0 }}⨯{{ else }}›{{ end }}'
+    template = '{{ if gt .Code 0 }}🕭{{ else }}🎄{{ end }}'
     type = 'text'
     style = 'plain'
     foreground_templates = ['{{ if gt .Code 0 }}red{{ end }}', '{{ if eq .Code 0 }}white{{ end }}']
