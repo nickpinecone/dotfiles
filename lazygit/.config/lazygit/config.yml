@@ -1,6 +1,0 @@
-gui:
-  theme:
-    selectedLineBgColor:
-      - reverse
-  showBottomLine: false
-  nerdFontsVersion: "3"
